@@ -1,0 +1,63 @@
+package me.rarehyperion.autoreplant.listeners;
+
+import me.rarehyperion.autoreplant.managers.ConfigManager;
+import me.rarehyperion.autoreplant.utility.CropUtils;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.World;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.inventory.ItemStack;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+public class CropHarvestListener implements Listener {
+
+    private final ConfigManager configManager;
+
+    public CropHarvestListener(final ConfigManager configManager) {
+        this.configManager = configManager;
+    }
+
+    @EventHandler(priority = EventPriority.HIGH)
+    public void onCropHarvest(final BlockBreakEvent event) {
+        final Player player = event.getPlayer();
+        final Block block = event.getBlock();
+        final Material type = block.getType();
+
+        if(!CropUtils.isCrop(type) || !CropUtils.isFullyGrown(block)) {
+            return;
+        }
+
+        System.out.println("IS A CROP");
+
+        final ItemStack tool = player.getInventory().getItemInMainHand();
+        final Collection<ItemStack> drops = block.getDrops(tool);
+
+        final World world = block.getWorld();
+        final Location location = block.getLocation().clone().add(0.5D, 0.5D, 0.5D);
+
+        for(final ItemStack drop : new ArrayList<>(drops)) {
+            if(CropUtils.isSeed(drop.getType())) {
+                if(drop.getAmount() > 1) drop.setAmount(drop.getAmount() - 1);
+                else drops.remove(drop);
+                break;
+            }
+        }
+
+        for(final ItemStack drop : drops) {
+            world.dropItemNaturally(location, drop);
+        }
+
+        event.setCancelled(true);
+        CropUtils.setAge(block, 0);
+
+        player.sendMessage("REPLANTED");
+    }
+
+}

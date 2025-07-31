@@ -1,4 +1,4 @@
-name: Auto Replant
+name: "AutoReplant"
 version: '0.1.0'
 main: me.rarehyperion.autoreplant.AutoReplant
 api-version: '1.21'
