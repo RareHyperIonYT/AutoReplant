@@ -1,0 +1,7 @@
+name: Auto Replant
+version: '0.1.0'
+main: me.rarehyperion.autoreplant.AutoReplant
+api-version: '1.21'
+load: STARTUP
+authors: [ RareHyperIon ]
+description: Automatically replants harvested crops using seeds from your inventory so you can harvest without ever planting again.
