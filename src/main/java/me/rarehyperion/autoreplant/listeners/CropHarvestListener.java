@@ -3,6 +3,7 @@ package me.rarehyperion.autoreplant.listeners;
 import com.cryptomorin.xseries.XSound;
 import me.rarehyperion.autoreplant.managers.ConfigManager;
 import me.rarehyperion.autoreplant.utility.CropUtils;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -34,12 +35,16 @@ public class CropHarvestListener implements Listener {
         final Block block = event.getBlock();
         final Material type = block.getType();
 
+        if(player.getGameMode() != GameMode.SURVIVAL) {
+            return;
+        }
+
         if(!CropUtils.isCrop(type) || !CropUtils.isFullyGrown(block)) {
             return;
         }
 
         final ItemStack tool = player.getInventory().getItemInMainHand();
-        final Collection<ItemStack> drops = block.getDrops(tool);
+        final Collection<ItemStack> drops = block.getDrops(tool, player);
 
         final World world = block.getWorld();
         final Location location = block.getLocation().clone().add(0.5D, 0.5D, 0.5D);
