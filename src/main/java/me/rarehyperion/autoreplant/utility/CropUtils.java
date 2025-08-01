@@ -63,6 +63,7 @@ public final class CropUtils {
         }
     }
 
+    public static void init() { /* no-op */ }
 
     static {
         CROP_TO_SEED_MAP.put(XMaterial.WHEAT.get(), XMaterial.WHEAT_SEEDS.get());
