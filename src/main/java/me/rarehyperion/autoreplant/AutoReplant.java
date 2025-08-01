@@ -9,9 +9,9 @@ public final class AutoReplant extends JavaPlugin {
     @Override
     public void onEnable() {
         final ConfigManager configManager = new ConfigManager(this);
-//        configManager.load();
+        configManager.load();
 
-        this.getServer().getPluginManager().registerEvents(new CropHarvestListener(configManager), this);
+        this.getServer().getPluginManager().registerEvents(new CropHarvestListener(this, configManager), this);
     }
 
     @Override

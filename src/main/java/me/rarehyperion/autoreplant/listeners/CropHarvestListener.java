@@ -1,5 +1,6 @@
 package me.rarehyperion.autoreplant.listeners;
 
+import com.cryptomorin.xseries.XSound;
 import me.rarehyperion.autoreplant.managers.ConfigManager;
 import me.rarehyperion.autoreplant.utility.CropUtils;
 import org.bukkit.Location;
@@ -12,15 +13,18 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 public class CropHarvestListener implements Listener {
 
+    private final JavaPlugin plugin;
     private final ConfigManager configManager;
 
-    public CropHarvestListener(final ConfigManager configManager) {
+    public CropHarvestListener(final JavaPlugin plugin, final ConfigManager configManager) {
+        this.plugin = plugin;
         this.configManager = configManager;
     }
 
@@ -33,8 +37,6 @@ public class CropHarvestListener implements Listener {
         if(!CropUtils.isCrop(type) || !CropUtils.isFullyGrown(block)) {
             return;
         }
-
-        System.out.println("IS A CROP");
 
         final ItemStack tool = player.getInventory().getItemInMainHand();
         final Collection<ItemStack> drops = block.getDrops(tool);
@@ -57,7 +59,20 @@ public class CropHarvestListener implements Listener {
         event.setCancelled(true);
         CropUtils.setAge(block, 0);
 
-        player.sendMessage("REPLANTED");
+        if(this.configManager.shouldPlaySoundEffects()) {
+            final String soundSource = this.configManager.getSoundSource();
+            final XSound.Record record = XSound.parse(soundSource);
+
+            if(record != null) {
+                record.withVolume(this.configManager.getSoundVolume());
+                record.withPitch(this.configManager.getSoundPitch());
+
+                final XSound.SoundPlayer sound = record.soundPlayer().forPlayers(player);
+                sound.play();
+            } else {
+                this.plugin.getLogger().warning(String.format("The sound '%s' does not exist.", soundSource));
+            }
+        }
     }
 
 }

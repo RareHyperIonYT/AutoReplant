@@ -1,0 +1,5 @@
+sound:
+  enabled: true
+  source: "block.note_block.bell"
+  volume: 1.0
+  pitch: 0.6
