@@ -44,7 +44,7 @@ public class CropHarvestListener implements Listener {
         }
 
         final ItemStack tool = player.getInventory().getItemInMainHand();
-        final Collection<ItemStack> drops = block.getDrops(tool, player);
+        final Collection<ItemStack> drops = block.getDrops(tool);
 
         final World world = block.getWorld();
         final Location location = block.getLocation().clone().add(0.5D, 0.5D, 0.5D);
