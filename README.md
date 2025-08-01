@@ -27,10 +27,10 @@ Automatically replants harvested crops so you can harvest without ever planting 
   <summary>config.yml</summary>
 
   ```yml
-    reload-success: "&aSuccessfully reloaded configuration!"
-    no-permission: "&cYou don't have permission to run this command."
+  reload-success: "&aSuccessfully reloaded configuration!"
+  no-permission: "&cYou don't have permission to run this command."
 
-    sound:
+  sound:
     enabled: true
     source: "block.note_block.bell"
     volume: 1.0
