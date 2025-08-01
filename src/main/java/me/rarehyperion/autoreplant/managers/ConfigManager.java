@@ -1,11 +1,14 @@
 package me.rarehyperion.autoreplant.managers;
 
+import me.rarehyperion.autoreplant.utility.MessageUtil;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class ConfigManager {
 
     private final JavaPlugin plugin;
+
+    private String reloadMessage, permissionMessage;
 
     // SFX
     private boolean soundEffects;
@@ -21,6 +24,9 @@ public class ConfigManager {
         this.plugin.reloadConfig();
 
         final FileConfiguration config = this.plugin.getConfig();
+
+        this.reloadMessage = MessageUtil.format(config.getString("reload-success", "&aSuccessfully reloaded configuration!"));
+        this.permissionMessage = MessageUtil.format(config.getString("no-permission", "&cYou don't have permission to run this command."));
 
         // Replant SFX
         this.soundEffects = config.getBoolean("sound.enabled", true);
@@ -48,5 +54,13 @@ public class ConfigManager {
     public String getSoundSource() {
         return this.soundSource;
     }
-    
+
+    public String getReloadMessage() {
+        return this.reloadMessage;
+    }
+
+    public String getPermissionMessage() {
+        return this.permissionMessage;
+    }
+
 }

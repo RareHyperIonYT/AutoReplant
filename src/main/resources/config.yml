@@ -1,3 +1,6 @@
+reload-success: "&aSuccessfully reloaded configuration!"
+no-permission: "&cYou don't have permission to run this command."
+
 sound:
   enabled: true
   source: "block.note_block.bell"
