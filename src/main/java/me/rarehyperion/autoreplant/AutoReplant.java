@@ -24,6 +24,8 @@ public final class AutoReplant extends JavaPlugin {
         XSound.getValues();
 
         // Make a call to this CropUtils so everything gets initialised before player interactions.
+        // Classes don't get loaded unless you either instantiate it, or make calls to it.
+        // So, by doing this we are preventing a slight delay on first replant.
         CropUtils.init();
     }
 
@@ -43,8 +45,4 @@ public final class AutoReplant extends JavaPlugin {
         command.setTabCompleter(executor);
     }
 
-    @Override
-    public void onDisable() {
-
-    }
 }
