@@ -1,7 +1,6 @@
 package me.rarehyperion.autoreplant.utility;
 
 import com.cryptomorin.xseries.XMaterial;
-import com.cryptomorin.xseries.reflection.XReflection;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.Ageable;
@@ -13,7 +12,7 @@ import java.util.Map;
 public final class CropUtils {
 
     private static final Map<Material, Material> CROP_TO_SEED_MAP = new HashMap<>();
-    private static final boolean ISFLAT = XReflection.supports(13);
+    private static final boolean ISFLAT = ReflectionUtil.supports(13);
 
     public static boolean isCrop(final Material material) {
         return CROP_TO_SEED_MAP.containsKey(material);
