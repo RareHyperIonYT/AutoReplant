@@ -68,7 +68,7 @@ public final class CropUtils {
         CROP_TO_SEED_MAP.put(XMaterial.WHEAT.get(), XMaterial.WHEAT_SEEDS.get());
         CROP_TO_SEED_MAP.put(XMaterial.CARROTS.get(), XMaterial.CARROT.get());
         CROP_TO_SEED_MAP.put(XMaterial.POTATOES.get(), XMaterial.POTATO.get());
-        CROP_TO_SEED_MAP.put(XMaterial.BEETROOTS.get(), XMaterial.BEETROOT.get());
+        CROP_TO_SEED_MAP.put(XMaterial.BEETROOTS.get(), XMaterial.BEETROOT_SEEDS.get());
     }
 
 }

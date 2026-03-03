@@ -1,5 +1,5 @@
 name: "AutoReplant"
-version: '0.1.1'
+version: '0.1.2'
 main: me.rarehyperion.autoreplant.AutoReplant
 api-version: '1.13'
 load: STARTUP
